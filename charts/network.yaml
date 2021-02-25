@@ -1,0 +1,13 @@
+apiVersion: gcp.platformref.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  name: bertelli10-nw
+  labels:
+    backstage.io/kubernetes-id: bertelli10
+spec:
+  id: bertelli10-nw
+  clusterRef:
+    id: bertelli10-cl
+  compositionSelector:
+    matchLabels:
+      provider: GCP

@@ -1,0 +1,42 @@
+name: Release Charts
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create ArgoCD application
+        run: |
+          curl -v -k --fail --location \
+          --request POST 'https://argocd.projectx.kiratech.biz/api/v1/applications' \
+          --header 'Content-Type: application/json' \
+          --header 'Cookie: argocd.token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3MGYzYTUzZC0zOThiLTQwOTktYjc4NC0wMWE4ZTBkNzliYjgiLCJpYXQiOjE2MTQxNzIzNDgsImlzcyI6ImFyZ29jZCIsIm5iZiI6MTYxNDE3MjM0OCwic3ViIjoiYmFja3N0YWdlIn0.w2VWyDm__YHG8JFcgEkotCQWj9OpvBpHIHwa9L5oogA' \
+          --data-raw '{
+              "metadata": {
+                  "name": "bertelli10"
+              },
+              "spec": {
+                  "source": {
+                      "repoURL": "https://github.com/braghettos/bertelli10",
+                      "path": "charts/"
+                  },
+                  "destination": {
+                      "namespace": "bertelli10",
+                      "server": "https://lokomotive.projectx.kiratech.biz:6443"
+                  },
+                  "syncPolicy": {
+                      "syncOptions": [
+                          "CreateNamespace=true"
+                      ],
+                      "automated": {
+                          "allowEmpty": true,
+                          "prune": false,
+                          "selfHeal": false
+                      }
+                  }
+              }
+          }'

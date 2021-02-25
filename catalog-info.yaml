@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "bertelli10"
+  description: "bertelli10"
+  annotations:
+    github.com/project-slug: braghettos/bertelli10
+    backstage.io/techdocs-ref: url:https://github.com/braghettos/bertelli10
+    argocd/app-name: "bertelli10"
+    backstage.io/kubernetes-id: "bertelli10"
+spec:
+  type: service
+  lifecycle: experimental
+  owner: "braghettos"
